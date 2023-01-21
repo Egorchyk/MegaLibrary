@@ -1,8 +1,16 @@
 package ru.mega.library.models;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Book {
     private int id;
+    @NotEmpty
+    @Size(min = 2, max = 100, message = "Количество символов в названии не менее 2 и не более 100")
     private String title;
+    @NotEmpty
+    @Size(min = 2, max = 100, message = "Количество символов в имени автора не менее 2 и не более 100")
     private String author;
     private int year;
 

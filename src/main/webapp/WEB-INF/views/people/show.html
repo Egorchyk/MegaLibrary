@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<p th:text="${person.getFullName()}"></p>
-<p th:text="${person.getYearOfBorn()}"></p>
+<p th:text="${person.getFullName()}">Full name</p>
+<p th:text="${person.getYearOfBorn()}">Year of Born</p>
 
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать читателя</a>
 
