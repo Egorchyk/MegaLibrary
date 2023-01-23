@@ -2,12 +2,9 @@ package ru.mega.library.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.mega.library.DAO.BookDAO;
 import ru.mega.library.models.Book;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/books")
@@ -38,10 +35,7 @@ public class BookController {
     }
 
     @PostMapping()
-    public String createBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "books/new";
-        }
+    public String createBook(@ModelAttribute("book") Book book) {
         bookDAO.save(book);
         return "redirect:/books";
     }
@@ -59,11 +53,7 @@ public class BookController {
     }
 
     @PatchMapping("/{id}")
-    public String updateBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
-                             @PathVariable("id") int id) {
-        if (bindingResult.hasErrors()) {
-            return "books/edit";
-        }
+    public String updateBook(@ModelAttribute("book") Book book, @PathVariable("id") int id) {
         bookDAO.update(id, book);
         return "redirect:/books";
     }
