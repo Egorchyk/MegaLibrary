@@ -8,6 +8,22 @@
 
 <p th:text="${person.getFullName() + ', ' + person.yearOfBorn}">Info</p>
 
+<hr/>
+
+<div th:if="${books.isEmpty()}">
+    <p>Человек пока не взял ни одной книги</p>
+    <hr/>
+</div>
+
+<div th:if="${!books.isEmpty()}">
+    <b>Книги:</b>
+    <br/>
+    <table th:each="book : ${books}">
+    <tr th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book </tr>
+    </table>
+    <hr/>
+</div>
+
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать читателя</a>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">

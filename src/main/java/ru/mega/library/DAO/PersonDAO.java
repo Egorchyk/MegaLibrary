@@ -3,6 +3,7 @@ package ru.mega.library.DAO;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import ru.mega.library.models.Book;
 import ru.mega.library.models.Person;
 
 import java.util.List;
@@ -37,5 +38,10 @@ public class PersonDAO {
     public void update(int id, Person person) {
         jdbcTemplate.update("UPDATE person set fullName=?, yearOfBorn=? WHERE id=?",
                 person.getFullName(), person.getYearOfBorn(), id);
+    }
+
+    public List<Book> getBookByPerson(int id) {
+        return jdbcTemplate.query("SELECT * FROM Book WHERE person_id=?", new Object[]{id},
+                new BeanPropertyRowMapper<>(Book.class));
     }
 }
